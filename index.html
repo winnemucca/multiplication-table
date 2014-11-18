@@ -7,26 +7,33 @@
   <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+<h1> An Angular Fueled Multiplication Table</h1> 
+  <div ng-controller="DisplayCtrl"> 
+    <div ng-if="content"> The value you have selected to display is: {{ content }}</div>
+    <div ng-if="!content">You have not selected a value to display</div>
+  </div>
 
-<!-- <table ng-controller='MultiplicationCtrl' initial-number-limit="10">
-	<tr ng-repeat="numberA in numbers">
-		<td ng-repeat="numberB in numbers">
-			{{ numberA * numberB }}
-		</td>
 
-	</tr>
-</table> -->
 <div ng-controller="MultiplicationCtrl" initial-number-limit="10">
 <input type ="number" ng-model="numberLimit" placeholder="enter a number" /> 
 <table >
     <tr ng-repeat="numberA in numbers">
-        <td ng-repeat="numberB in numbers">
+
+        <td ng-repeat="numberB in numbers"
+        ng-click="setActiveNumber(compute(numberA,numberB))"
+        ng-mouseover="setActiveFactors(numberA, numberB)"
+        ng-class="{hover: matchesFactor(numberA,numberB)} "
+        ng-mouseleave='clearActiveFactors()'>
             {{ compute(numberA, numberB) }}
         </td>
     </tr>
 </table>
 
 </div>
+<div ng-controller="DisplayCtrl">
+    <div ng-if="content">The value you have selected to display is: {{ content }}</div>
+    <div ng-if="!content">You have not selected a value to display</div>
+  </div>
 
 
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
